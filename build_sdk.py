@@ -196,6 +196,20 @@ SUPPORTED_BOARDS = (
         },
     ),
     BoardInfo(
+        name="zero3",
+        arch=KernelArch.AARCH64,
+        gcc_cpu="cortex-a55",
+        loader_link_address=0x2000000,
+        kernel_options={
+            "KernelPlatform": "zero3",
+            "KernelIsMCS": True,
+            "KernelArmExportPCNTUser": True,
+            "KernelArmHypervisorSupport": True,
+            "KernelArmVtimerUpdateVOffset": False,
+            "KernelAllowSMCCalls": True,
+        },
+    ),
+    BoardInfo(
         name="ultra96v2",
         arch=KernelArch.AARCH64,
         gcc_cpu="cortex-a53",

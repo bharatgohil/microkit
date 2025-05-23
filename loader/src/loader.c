@@ -240,6 +240,20 @@ static void putc(uint8_t ch)
     while ((*UART_REG(UART_STATUS) & UART_TX_FULL));
     *UART_REG(UART_WFIFO) = ch;
 }
+#elif defined(BOARD_zero3)
+#define UART_BASE   0xfe660000
+#define UTHR        0x0
+#define ULSR        0x14
+#define ULSR_THRE   (1 << 5)
+
+static void uart_init() {}
+
+static void putc(uint8_t ch)
+{
+    while ((*UART_REG(ULSR) & ULSR_THRE) == 0);
+    *UART_REG(UTHR) = ch;
+}
+
 #elif defined(BOARD_ultra96v2)
 /* Use UART1 available through USB-to-JTAG/UART pod */
 #define UART_BASE 0x00ff010000
